@@ -168,6 +168,36 @@
     <p class="setup-similar-label">Петр Петров</p>
   </div>
 </template>
-
+<script>
+//Объявляем переменную, которая будет управлять размером файербола в пикселях
+	var fireballSize;
+// Присваиваем этой переменной значение 22
+	fireballSize = 22;
+// Определяем переменную, которая будет управлять значением скорости файербола в игре. Если файербол летит влево (по направлению ветра), то скорость 5, иначе - 2
+		var getFireballSpeed = function(left) {
+			var fireBallSpeed = left ? 5 : 2;
+			return fireBallSpeed;
+		};
+// Определяем переменную, управляющую скоростью пермещения мага
+	var wizardSpeed = 3;
+// Определяем переменную, задающую ширину мага
+	var wizardWidth = 70;
+// Высота мага задается пропорционально его ширине
+	var getWizardHeight = function(wizardWidth) {
+		var wizardHeight = 1.337 * wizardWidth;
+		return wizardHeight;
+	}
+// Определяем переменную, которое задает положение по горизонтали середины фигурки мага по центру игрового поля
+	var getWizardX = function(width) {
+		var wizardX = (width - wizardWidth)/2;
+		return wizardX;
+	}
+// Задаем положение мага по вертикали - на 2/3 высоты игрового поля
+	var getWizardY = function(height) {
+		var wizardY = (height - getWizardHeight(wizardWidth))*2/3;
+		return wizardY;
+	}
+</script>
+<script src="js/game.js"></script>
 </body>
 </html>
