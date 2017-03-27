@@ -18,7 +18,8 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillText('Список результатов:', 120, 60);
 // Рисуем гистрограмму времен участников
   var max = -1;
-  var maxIndex = -1;
+  var maxIndex;
+  maxIndex = -1;
   for (var i = 0; i < times.length; i++) {
     var time = times[i];
     if (time > max) {
@@ -41,7 +42,8 @@ window.renderStatistics = function (ctx, names, times) {
     if (names[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255,0,0,1)'; // Задаем заливку красным цветом гистограммы для игрока с именем "Вы"
     }
-    else {
+    else 
+	{
       ctx.fillStyle = 'rgba(51,17,220,' + a + ')';  // Задаем заливку гистограммы для других игроков синим цветом с разным уровнем прозрачности
     }
     ctx.fillRect(initialX + indent * i, initialY + FiguresHeight + otstup, barWidth, times[i] * step);   // Рисуем гистрограмму для разных игроков
