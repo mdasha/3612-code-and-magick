@@ -38,8 +38,7 @@ window.renderStatistics = function (ctx, names, times) {
     var a = Math.random(); // Прозрачность гистограмм, кроме игрока с именем "Вы",  задаем рандомно
     var otstup = histogramHeight - times[i] * step; // Отступ для расчета координаты Y первой и второй строки (для выравнивания гистограмм по нижнему краю)
     ctx.fillText(Math.ceil(times[i]), initialX + indent * i, initialY + otstup);  // Время прохождения игры разными игроками, округлено до целого кверху
-    if (names[i] === 'Вы') 
-	{
+    if (names[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255,0,0,1)'; // Задаем заливку красным цветом гистограммы для игрока с именем "Вы"
     }
     else {
