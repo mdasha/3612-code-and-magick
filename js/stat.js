@@ -22,9 +22,9 @@ window.renderStatistics = function (ctx, names, times) {
   for (var i = 0; i < times.length; i++) {
     var time = times[i];
     if (time > max) {
-    max = Math.ceil(time);
-    maxIndex = i;
-  }
+      max = Math.ceil(time);
+      maxIndex = i;
+    }
   }
   var histogramHeight = 150;              // px;   - высота гистограммы
   var step = histogramHeight / (max - 0); // px;
@@ -34,17 +34,17 @@ window.renderStatistics = function (ctx, names, times) {
   var initialX = 140; // px; - координата X первой строки первой колонки
   var initialY = 80;  // px; - координата Y первой строки первой колонки
   ctx.textBaseline = 'top'; // положение надписи от левого верхнего угла
-  for (var i = 0; i < times.length; i++) {
-    var a = Math.random( ); // Прозрачность гистограмм, кроме игрока с именем "Вы",  задаем рандомно
+  for (i = 0; i < times.length; i++) {
+    var a = Math.random(); // Прозрачность гистограмм, кроме игрока с именем "Вы",  задаем рандомно
     var otstup = histogramHeight - times[i] * step; // Отступ для расчета координаты Y первой и второй строки (для выравнивания гистограмм по нижнему краю)
     ctx.fillText(Math.ceil(times[i]), initialX + indent * i, initialY + otstup);  // Время прохождения игры разными игроками, округлено до целого кверху
-    if (names[i] === 'Вы') {
-    ctx.fillStyle = 'rgba(255,0,0,1)'; // Задаем заливку красным цветом гистограммы для игрока с именем "Вы"
-  }
-    else 
-  {
-    ctx.fillStyle = 'rgba(51,17,220,' + a + ')';  // Задаем заливку гистограммы для других игроков синим цветом с разным уровнем прозрачности
-  }
+    if (names[i] === 'Вы') 
+	{
+      ctx.fillStyle = 'rgba(255,0,0,1)'; // Задаем заливку красным цветом гистограммы для игрока с именем "Вы"
+    }
+    else {
+      ctx.fillStyle = 'rgba(51,17,220,' + a + ')';  // Задаем заливку гистограммы для других игроков синим цветом с разным уровнем прозрачности
+    }
     ctx.fillRect(initialX + indent * i, initialY + FiguresHeight + otstup, barWidth, times[i] * step);   // Рисуем гистрограмму для разных игроков
     ctx.fillStyle = '#000';  // Меняем снова заливку на черный
     ctx.fillText(names[i], initialX + indent * i, initialY + histogramHeight + FiguresHeight);  // Подписываем имена игроков под гистограммой
