@@ -1,7 +1,9 @@
 'use strict';
 var userDialog = document.querySelector('.setup');
 var avatar = document.querySelector('.setup-open');
+var setupSubmit = userDialog.querySelector('.setup-submit');
 var setupClose = userDialog.querySelector('.setup-close');
+var setupUserName = userDialog.querySelector('.setup-user-name');
 var wizardSelector = document.querySelector('.wizard');
 var wizardCoat = wizardSelector.querySelector('.wizard-coat');
 var wizardEyes = wizardSelector.querySelector('.wizard-eyes');
@@ -67,9 +69,24 @@ var openPopup = function () {
     }
   });
 };
-
+// Проверяем валидность заполнения поля с именем. Если длина поля меньше двух или больше 50 символов, то выводим предупреждение об ошибке и не даем закрыть форму.
+var j = 0;
 var closePopup = function () {
-  userDialog.classList.add('hidden');
+  if (setupUserName.value.length > 1 && setupUserName.value.length < 51) {
+    userDialog.classList.add('hidden');
+  } else {
+    if (j === 0) {
+      var warning = userDialog.querySelector('.setup-user');
+      var newElement = document.createElement('p');
+      newElement.innerHTML = 'Введите имя персонажа от 2 до 50 символов!';
+      newElement.style.color = 'red';
+      newElement.style.marginTop = '10px';
+      newElement.style.marginBottom = 0;
+      fragment.appendChild(newElement);
+      warning.appendChild(fragment);
+      j = j + 1;
+    }
+  }
 };
 
 
@@ -87,14 +104,21 @@ setupClose.addEventListener('keydown', function (evt) {
   }
 });
 
-// Закрываем диалог пользователя
+// Закрываем диалог пользователя при клике на крестик
 setupClose.addEventListener('click', function () {
   closePopup();
 });
-// цвет плаща меняется рандомно при нажатии на него
-wizardCoat.addEventListener('click', function () {
-  wizardCoat.style.fill = WIZARD_COATS[rand(0, 5)];
+// Закрываем диалог пользователя при клике на кнопке сохранить
+setupSubmit.addEventListener('click', function () {
+  closePopup();
 });
+// цвет плаща меняется перебором массива по порядку при нажатии на него
+i = 1;
+wizardCoat.addEventListener('click', function () {
+  wizardCoat.style.fill = WIZARD_COATS[i];
+  i = (i < WIZARD_COATS.length) ? (i + 1) : 0;
+});
+
 // цвет глаз меняется рандомно при нажатии на них
 wizardEyes.addEventListener('click', function () {
   wizardEyes.style.fill = WIZARD_EYES[rand(0, 4)];
